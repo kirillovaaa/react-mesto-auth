@@ -41,6 +41,21 @@ const App = () => {
 
   // при старте приложения ищем токен в localstorage
   useEffect(() => {
+    const handleTokenCheck = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        api.setToken(token);
+        api
+          .getUserInfo()
+          .then((user) => {
+            setCurrentUser(user);
+            setIsLoggedIn(true);
+            navigate("/", { replace: true });
+          })
+          .catch((e) => console.log(`ошибка сохраненного токена: (${e})`));
+      }
+    };
+
     handleTokenCheck();
   }, []);
 
@@ -48,39 +63,14 @@ const App = () => {
   // (работает только тогда, когда isLoggedIn)
   useEffect(() => {
     if (isLoggedIn) {
-      const getData = async () => {
-        const user = await api.getUserInfo();
-        const cards = await api.getInitialCards();
-        return { user, cards };
-      };
-
-      getData()
-        .then(({ user, cards }) => {
-          setCurrentUser(user);
+      api
+        .getInitialCards()
+        .then((cards) => {
           setCards(cards);
         })
         .catch((e) => console.log(e));
     }
   }, [isLoggedIn]);
-
-  const handleTokenCheck = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // если токен есть, то выполняем проверку
-      api.setToken(token);
-      api
-        .getUserInfo()
-        .then(() => {
-          // если токен рабочий, то приложение должно направиться на главную
-          setIsLoggedIn(true);
-          navigate("/", { replace: true });
-        })
-        .catch((e) => {
-          // если токен больше недействителен, пишем ошибку
-          console.log(`ошибка сохраненного токена: (${e})`);
-        });
-    }
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
