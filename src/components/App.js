@@ -41,22 +41,14 @@ const App = () => {
 
   // при старте приложения ищем токен в localstorage
   useEffect(() => {
-    const handleTokenCheck = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        api.setToken(token);
-        api
-          .getUserInfo()
-          .then((user) => {
-            setCurrentUser(user);
-            setIsLoggedIn(true);
-            navigate("/", { replace: true });
-          })
-          .catch((e) => console.log(`ошибка сохраненного токена: (${e})`));
-      }
-    };
-
-    handleTokenCheck();
+    api
+      .authorize()
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        navigate("/", { replace: true });
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   // эффект для запроса на получение карточек
@@ -73,7 +65,7 @@ const App = () => {
   }, [isLoggedIn]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    api.logout();
     setIsLoggedIn(false);
   };
 
@@ -171,11 +163,9 @@ const App = () => {
   const handleLoginSubmit = ({ email, password }) => {
     api
       .login(email, password)
-      .then((token) => {
+      .then(() => {
         setIsTooltipOpen(true);
         setIsTooltipSuccessful(true);
-        localStorage.setItem("token", token);
-        api.setToken(token);
         setIsLoggedIn(true);
         navigate("/", { replace: true });
       })

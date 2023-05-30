@@ -4,49 +4,70 @@ class Api {
     this._headers = options.headers;
   }
 
-  setToken(token) {
+  _setToken = (token) => {
     this._headers.authorization = `Bearer ${token}`;
-  }
+  };
 
-  _getResponseData(res) {
+  _getResponseData = (res) => {
     if (res.ok) {
       return res.json().then((res) => res.data);
     }
     return Promise.reject(`Ошибка: ${res.status}`);
-  }
+  };
 
-  register(email, password) {
+  authorize = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this._setToken(token);
+      return this.getUserInfo()
+        .then((user) => user)
+        .catch((e) => Promise.reject(`Ошибка сохраненного токена: ${e}`));
+    }
+    return Promise.reject(`Токен не найден в локальном хранилище`);
+  };
+
+  logout = () => {
+    localStorage.removeItem("token");
+  };
+
+  register = (email, password) => {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ email, password }),
     }).then(this._getResponseData);
-  }
+  };
 
-  login(email, password) {
+  login = (email, password) => {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ email, password }),
     }).then((res) => {
       if (res.ok) {
-        return res.json().then((json) => json.token);
+        return res
+          .json()
+          .then(({ token }) => {
+            localStorage.setItem("token", token);
+            this.setToken(token);
+          })
+          .catch((e) => console.log(e));
       }
-      return Promise.reject(`Ошибка авторизации: ${res.status}`);
+      return Promise.reject(`Ошибка входа: ${res.status}`);
     });
-  }
+  };
 
-  getUserInfo() {
+  getUserInfo = () => {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._getResponseData);
-  }
+  };
 
-  getInitialCards() {
+  getInitialCards = () => {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._getResponseData);
-  }
+  };
 
   setUserInfo = (name, about) => {
     return fetch(`${this._baseUrl}/users/me`, {
