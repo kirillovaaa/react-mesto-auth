@@ -49,7 +49,7 @@ class Api {
           .json()
           .then(({ token }) => {
             localStorage.setItem("token", token);
-            this.setToken(token);
+            this._setToken(token);
           })
           .catch((e) => console.log(e));
       }
