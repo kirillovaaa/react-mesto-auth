@@ -51,22 +51,36 @@ const App = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  // эффект для запроса на получение карточек
-  // (работает только тогда, когда isLoggedIn)
+  // эффект для запроса на получение пользователя и карточек
+  // срабатывает при каждом изменении состояния isLoggedIn
   useEffect(() => {
     if (isLoggedIn) {
+      // так как мы уже могли получить пользовательские данные при успешной проверке токена на первом рендере,
+      // нужно убедиться, что они уже есть -- если есть, лишний запрос делать не нужно
+      if (!currentUser._id) {
+        api
+          .getUserInfo()
+          .then((user) => {
+            setCurrentUser(user);
+          })
+          .catch((e) => console.log(e));
+      }
+
       api
         .getInitialCards()
         .then((cards) => {
           setCards(cards);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+        });
     }
   }, [isLoggedIn]);
 
   const handleLogout = () => {
     api.logout();
     setIsLoggedIn(false);
+    setCurrentUser(defaultUser);
   };
 
   const handleEditAvatarClick = () => {
