@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import deleteIcon from '../images/delete.svg';
 import likeActiveIcon from '../images/heart-fill.svg';
 import likeInactiveIcon from '../images/heart-stroke.svg';
-import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const Card = ({ card, onClick, onLike, onDelete }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -39,6 +39,7 @@ const Card = ({ card, onClick, onLike, onDelete }) => {
           className="places__fav-button"
           onClick={handleLike}
         >
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             className="places__fav-image"
             src={isLiked ? likeActiveIcon : likeInactiveIcon}
@@ -52,6 +53,7 @@ const Card = ({ card, onClick, onLike, onDelete }) => {
         className="places__delete-button"
         onClick={handleDelete}
       >
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         {isOwn && <img className="places__delete-icon" src={deleteIcon} />}
       </button>
     </div>

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import InfoTooltip from './InfoTooltip';
-import api from '../utils/api';
-import Header from './Header';
-import PopupWithForm from './PopupWithForm';
-import EditProfilePopup from './EditProfilePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import AddPlacePopup from './AddPlacePopup';
-import ImagePopup from './ImagePopup';
-import Main from './Main';
-import Footer from './Footer';
-import ProtectedRoute from './ProtectedRoute';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+import api from '../utils/api';
+import AddPlacePopup from './AddPlacePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import EditProfilePopup from './EditProfilePopup';
+import Footer from './Footer';
+import Header from './Header';
+import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
+import Login from './Login';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
+import ProtectedRoute from './ProtectedRoute';
+import Register from './Register';
 
 const defaultUser = {
   _id: '',
@@ -49,6 +49,7 @@ const App = () => {
         navigate('/', { replace: true });
       })
       .catch((e) => console.log(e));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // эффект для запроса на получение пользователя и карточек
@@ -75,6 +76,7 @@ const App = () => {
           console.log(e);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
   const handleLogout = () => {
