@@ -1,22 +1,22 @@
-import React from "react";
-import success from "../images/success.svg";
-import error from "../images/error.svg";
-import closeIcon from "../images/close.svg";
+import React from 'react';
+import success from '../images/success.svg';
+import error from '../images/error.svg';
+import closeIcon from '../images/close.svg';
 
 const InfoTooltip = ({ isOpen, isSuccessful, onClose }) => {
   const tooltipData = {
     success: {
       imageSrc: success,
-      text: "Вы успешно зарегистрировались!",
+      text: 'Вы успешно зарегистрировались!',
     },
     error: {
       imageSrc: error,
-      text: "Что-то пошло не так! Попробуйте ещё раз.",
+      text: 'Что-то пошло не так! Попробуйте ещё раз.',
     },
   };
 
   return (
-    <div className={`popup ${isOpen && "popup_opened"}`}>
+    <div className={`popup ${isOpen && 'popup_opened'}`}>
       <div className="popup__tooltip">
         <img
           className="popup__tooltip-icon"

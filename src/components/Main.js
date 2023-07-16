@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import Card from "./Card";
-import avatar from "../images/avatar.png";
-import edit from "../images/edit.svg";
-import plus from "../images/plus.svg";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useContext } from 'react';
+import Card from './Card';
+import edit from '../images/edit.svg';
+import plus from '../images/plus.svg';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const Main = ({
   cards,

@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import InfoTooltip from "./InfoTooltip";
-import api from "../utils/api";
-import Header from "./Header";
-import PopupWithForm from "./PopupWithForm";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ImagePopup from "./ImagePopup";
-import Main from "./Main";
-import Footer from "./Footer";
-import ProtectedRoute from "./ProtectedRoute";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
+import InfoTooltip from './InfoTooltip';
+import api from '../utils/api';
+import Header from './Header';
+import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ImagePopup from './ImagePopup';
+import Main from './Main';
+import Footer from './Footer';
+import ProtectedRoute from './ProtectedRoute';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const defaultUser = {
-  _id: "",
-  email: "",
-  name: "",
-  about: "",
-  avatar: "",
+  _id: '',
+  email: '',
+  name: '',
+  about: '',
+  avatar: '',
 };
 
 const App = () => {
@@ -46,7 +46,7 @@ const App = () => {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       })
       .catch((e) => console.log(e));
   }, []);
@@ -165,7 +165,7 @@ const App = () => {
       .then(() => {
         setIsTooltipOpen(true);
         setIsTooltipSuccessful(true);
-        navigate("/sign-in");
+        navigate('/sign-in');
       })
       .catch((e) => {
         setIsTooltipOpen(true);
@@ -181,7 +181,7 @@ const App = () => {
         setIsTooltipOpen(true);
         setIsTooltipSuccessful(true);
         setIsLoggedIn(true);
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       })
       .catch((e) => {
         setIsTooltipOpen(true);

@@ -1,9 +1,9 @@
-import React from "react";
-import closeIcon from "../images/close.svg";
+import React from 'react';
+import closeIcon from '../images/close.svg';
 
 const ImagePopup = ({ card, onClose }) => {
   return (
-    <div className={`popup ${card && "popup_opened"}`} id="popup-image">
+    <div className={`popup ${card && 'popup_opened'}`} id="popup-image">
       <div className="popup__image-wrapper">
         <img className="popup__image" src={card?.link} alt={card?.name} />
 

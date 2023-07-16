@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import deleteIcon from "../images/delete.svg";
-import likeActiveIcon from "../images/heart-fill.svg";
-import likeInactiveIcon from "../images/heart-stroke.svg";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useContext } from 'react';
+import deleteIcon from '../images/delete.svg';
+import likeActiveIcon from '../images/heart-fill.svg';
+import likeInactiveIcon from '../images/heart-stroke.svg';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const Card = ({ card, onClick, onLike, onDelete }) => {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some((userId) => userId === currentUser._id);
 
   const handleClick = () => {

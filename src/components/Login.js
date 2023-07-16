@@ -1,7 +1,4 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import logo from "../images/logo.svg";
-import InfoTooltip from "./InfoTooltip";
+import React, { useRef } from 'react';
 
 const Login = ({ onSubmit }) => {
   const email = useRef();

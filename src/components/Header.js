@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import logo from "../images/logo.svg";
+import React, { useContext } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import logo from '../images/logo.svg';
 
-/**
- * TODO:
- * 1. сделать все стили
- * 2. функционал кнопки выхода
- */
 const Header = ({ onLogout }) => {
   const currentUser = useContext(CurrentUserContext);
 
@@ -26,7 +21,7 @@ const Header = ({ onLogout }) => {
                 <span className="header__user-email">{currentUser.email}</span>
                 <button
                   className="header__button"
-                  style={{ color: "#A9A9A9" }}
+                  style={{ color: '#A9A9A9' }}
                   onClick={onLogout}
                 >
                   Выйти
@@ -37,7 +32,7 @@ const Header = ({ onLogout }) => {
           <Route
             path="/sign-up"
             element={
-              <Link to={"/sign-in"} className="header__button">
+              <Link to={'/sign-in'} className="header__button">
                 Вход
               </Link>
             }
@@ -45,7 +40,7 @@ const Header = ({ onLogout }) => {
           <Route
             path="/sign-in"
             element={
-              <Link to={"/sign-up"} className="header__button">
+              <Link to={'/sign-up'} className="header__button">
                 Регистрация
               </Link>
             }

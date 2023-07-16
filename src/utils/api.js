@@ -16,7 +16,7 @@ class Api {
   };
 
   authorize = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
       this._setToken(token);
       return this.getUserInfo()
@@ -27,12 +27,12 @@ class Api {
   };
 
   logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
   };
 
   register = (email, password) => {
     return fetch(`${this._baseUrl}/signup`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }),
     }).then(this._getResponseData);
@@ -40,7 +40,7 @@ class Api {
 
   login = (email, password) => {
     return fetch(`${this._baseUrl}/signin`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }),
     }).then((res) => {
@@ -48,7 +48,7 @@ class Api {
         return res
           .json()
           .then(({ token }) => {
-            localStorage.setItem("token", token);
+            localStorage.setItem('token', token);
             this._setToken(token);
           })
           .catch((e) => console.log(e));
@@ -71,7 +71,7 @@ class Api {
 
   setUserInfo = (name, about) => {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name, about }),
     }).then(this._getResponseData);
@@ -79,7 +79,7 @@ class Api {
 
   setUserAvatar = (avatarSrc) => {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ avatar: avatarSrc }),
     }).then(this._getResponseData);
@@ -87,7 +87,7 @@ class Api {
 
   addCard = (name, link) => {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name, link }),
     }).then(this._getResponseData);
@@ -95,21 +95,21 @@ class Api {
 
   removeCard = (id) => {
     return fetch(`${this._baseUrl}/cards/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._getResponseData);
   };
 
   addLike = (id) => {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "PUT",
+      method: 'PUT',
       headers: this._headers,
     }).then(this._getResponseData);
   };
 
   removeLike = (id) => {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._getResponseData);
   };
@@ -122,9 +122,11 @@ class Api {
   };
 }
 
-export default new Api({
-  baseUrl: "https://auth.nomoreparties.co",
+const api = new Api({
+  baseUrl: 'https://mesto-backend.nomoredomains.xyz',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
+
+export default api;

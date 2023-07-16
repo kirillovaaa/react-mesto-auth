@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import logo from "../images/logo.svg";
-import InfoTooltip from "./InfoTooltip";
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
   const email = useRef();
